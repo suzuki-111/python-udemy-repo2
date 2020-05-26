@@ -3,9 +3,5 @@ This is my first repo
 
  lesson.py 
 
-a = 'test'
-b = a
-c = b
-
-print(c)
-
+print('Hi', 'Mike', sep=',', end='.\n')
+print('o')
