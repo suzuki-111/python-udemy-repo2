@@ -3,14 +3,29 @@ This is my first repo
 
  lesson.py 
 
-about value
+about literal
 
-import math
+print('hello')
+print("hello")
+print("I don't know")
+print('I don\'t know')
+print('say "I don\'t know"')
+print("say \"I don't know\"")
 
-result = math.sqrt(25)
-print(result)
+print('hello.\nHow are you?')
+print(r'C:\name\name')
 
-y = math.log2(10)
-print(y)
+print("#############")
+print("""\
+line1
+line2
+line3\
+""")
+print("##############")
 
-print(help(math))
+print('Hi.'*3 + 'Mike.')
+
+s = ('aaaaaaaaaaaaaaaaaaaaa'
+    'bbbbbbbbbbbbbbbbbbbbb')
+
+print(s)
