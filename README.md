@@ -3,7 +3,7 @@ This is my first repo
 
  lesson.py 
 
-about literal
+about literal 2
 
 print('hello')
 print("hello")
@@ -29,3 +29,19 @@ s = ('aaaaaaaaaaaaaaaaaaaaa'
     'bbbbbbbbbbbbbbbbbbbbb')
 
 print(s)
+
+print('#############')
+word = 'python'
+print(word[0])
+print(word[1])
+print(word[-1])
+print(word[0:2])
+print(word[2:5])
+print('###############')
+print(word[:2])
+print(word[3:])
+print('###############')
+word ='j' + word[1:]
+print(word[:])
+n = len(word)
+print(n)
