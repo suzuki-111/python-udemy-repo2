@@ -1,11 +1,16 @@
-# python-udemy-repo2
 This is my first repo
+# python-udemy-repo2
 
  lesson.py 
 
-a = 'test'
-b = a
-c = b
+about value
 
-print(c)
+import math
 
+result = math.sqrt(25)
+print(result)
+
+y = math.log2(10)
+print(y)
+
+print(help(math))
