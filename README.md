@@ -3,22 +3,33 @@ This is my first repo
 
  lesson.py 
 
-literal method
+# list copy
 
-s = 'My name is Mike. Hi Mike.'
-print(s)
-is_start = s.startswith('My')
-print(is_start)
-is_start = s.startswith('x')
-print(is_start)
+i = [1, 2, 3, 4, 5]
+j = i
+print('j=', j)
+print('i=', i)
 
-print('##########')
 
-print(s.find('Mike'))
-print(s.rfind('Mike'))
-print(s.count('Mike'))
-print(s.capitalize())
-print(s.title())
-print(s.upper())
-print(s.lower())
-print(s.replace('Mike', 'Nancy'))
+x = [1, 2, 3, 4, 5]
+y = x.copy()
+#y = x[:]
+y[0] = 100
+print('y=', y)
+print('x=', x)
+
+X = 20
+Y = X
+Y = 5
+print(id(X))
+print(id(Y))
+print(Y)
+print(X)
+
+X = ['a', 'b']
+Y = X
+Y[0] = 'p'
+print(id(X))
+print(id(Y))
+print(Y)
+print(X)
