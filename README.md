@@ -3,33 +3,30 @@ This is my first repo
 
  lesson.py 
 
-# list copy
+# tuple
 
-i = [1, 2, 3, 4, 5]
-j = i
-print('j=', j)
-print('i=', i)
+num_tuple =(10,20)
+print((num_tuple))
 
+x, y =num_tuple
+print(x,y)
 
-x = [1, 2, 3, 4, 5]
-y = x.copy()
-#y = x[:]
-y[0] = 100
-print('y=', y)
-print('x=', x)
+x, y =10,20
+print(x,y)
 
-X = 20
-Y = X
-Y = 5
-print(id(X))
-print(id(Y))
-print(Y)
-print(X)
+min, max = 0, 199
+print(min,max)
 
-X = ['a', 'b']
-Y = X
-Y[0] = 'p'
-print(id(X))
-print(id(Y))
-print(Y)
-print(X)
+i =10
+j =20
+tmp = i
+i = j
+j = tmp
+
+print(i,j)
+
+a = 100
+b = 200
+print(a, b)
+a, b = b, a
+print(a, b)
