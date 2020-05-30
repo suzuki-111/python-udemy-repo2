@@ -3,30 +3,24 @@ This is my first repo
 
  lesson.py 
 
-# tuple
+# if
 
-num_tuple =(10,20)
-print((num_tuple))
 
-x, y =num_tuple
-print(x,y)
+x = 10
 
-x, y =10,20
-print(x,y)
+if x < 0:
+    print('negative')
+elif x == 0:
+    print('zero')
+elif x == 10:
+    print('10')
+elif x > 0:
+    print('positive')
 
-min, max = 0, 199
-print(min,max)
+a = 5
+b = 10
 
-i =10
-j =20
-tmp = i
-i = j
-j = tmp
-
-print(i,j)
-
-a = 100
-b = 200
-print(a, b)
-a, b = b, a
-print(a, b)
+if a > 0:
+    print('a is positve')
+    if b > 0:
+        print('b is positive')
