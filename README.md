@@ -3,20 +3,12 @@ This is my first repo
 
  lesson.py 
 
-#count = 0
-#while count < 5:
-    #print(count)
-    #count += 1
+#i = 0
+#for fruit in ['apple', 'banana', 'orange']:
+#    print(i, fruit)
+#    i += 1
 
+#　下のように簡略化できる
 
-count = 0
-while True:
-    if count >= 5:
-        break
-
-    if count == 2:
-        count += 1
-        continue
-        
-    print(count)
-    count += 1
+for i, fruit in enumerate(['apple', 'banana', 'orange']):
+    print(i, fruit)
