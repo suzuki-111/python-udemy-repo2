@@ -3,79 +3,57 @@ This is my first repo
 
  lesson.py 
 
-def say_something(): #関数の宣言、型はfunction
-    print('hi')
+#複数の引数を使いたい時
+def say_something(word, word2, word3):
+    print(word)
+    print(word2)
+    print(word3)
 
-say_something()      #()がないと実行できない
+say_something('Hi', 'Mike', 'Nance')
+#上記のようにするとめんどくさい。タプル型で以下のように表現すべき
+#変数の前に＊をつけることで引数がタプルになる
+def say_something(word, *args):
+    print('word =', word)
+    for arg in args:
+        print(arg)
 
-print("\n###########\n")
+say_something('Hi!', 'Mike', 'Nance')
 
-def say_something():
-    s = 'hi'
-    return s         #返り値
+#下記のような表現もできる
+#t = ('Mike', 'Nancy')
+#say_something('Hi!', #t)
 
-result = say_something()     #関数を実行した結果の値だけを渡す
-print(result)
+print('##########')
+###################
 
-print("\n###########\n")
+#キーワード引数の辞書化
 
-def what_is_this(color): #()内の値は引数と呼ばれる変数
-    if color == 'red':
-        return 'tomato'
-    elif color =='green':
-        return 'green pepper'
-    else:
-        return "I don't know"
+#def menu(entree='beef', drink='wine'):
+#    print(entree, drink)
 
-result = what_is_this('red')
-result = what_is_this('green')
-result = what_is_this('yellow')
+#menu(entree='beef', drink='cofee')
+#上記のようなキーワードをまとめて記述できる
 
-print(result)
+def menu(**kwargs):
+    print(kwargs)
+    for k, v in kwargs.items():
+        print(k, v)
 
-#関数定義をしてやることで同じコードを何回も書かなくて済む
+#menu(entree='beef', drink='cofee')
 
-print("\n###########\n")
-#############################
+#辞書を別で定義してやることも可能
+d = {
+    'entree': 'beef',
+    'drink': 'ice cofee',
+    'dessert': 'ice'
+}
+menu(**d)
 
-def menu(entree, drink, dessert): #引数は複数設定可能
-#def menu(entree='beef', drink='wine', dessert='ice'): #このように最初から変数に値を入れてもできる「デフォルト引数」
-    print('entree =', entree)
-    print('drink =', drink)
-    print('dessert =', dessert)
+#引数の表現をいままでの全てを同時にやることも可能
+#ただしargsとkwargsの順番は下記でないといけない
+def menu(food, *args, **kwargs):
+    print(food)
+    print(args)
+    print(kwargs)
 
-menu(entree='beef', dessert='ice', drink='beer') #入れ間違えそうな時はこのようにキーワードで紐付けすることが可能
-
-print("\n###########\n")
-#############################
-
-#デフォルト引数で気をつけること
-def test_func(x, l = []):
-    l.append(x)
-    return l
-
-#y = [1, 2, 3]
-#r = test_func(100, y)
-#print(r)
-#y = [1, 2, 3]
-#r = test_func(200, y)
-#print(r)
-#上記のように毎回リストを与えてやれば問題ない
-
-r = test_func(100)
-print(r)
-r = test_func(100)
-print(r)
-#しかし上記の場合、リストにどんどん更新されていき、想定したリストと違うものができやすくバグになりやすい
-#引数には空のlist, dict はあまり使うべきでない。使う場合は以下のように関数内で空のリストを定義する
-
-def test_func(x, l=None):
-    if l is None:
-        l = []
-    l.append(x)
-    return l
-
-r = test_func(100)
-print(r)
-r = test_func(100)
-print(r)
+menu('banana', 'apple', 'orange', entree='beef', drink='cofee')
