@@ -3,73 +3,34 @@ This is my first repo
 
  lesson.py 
 
-#リスト内包表記
-t = (1, 2, 3, 4, 5)
-t2 = (5, 6, 7, 8, 9, 10)
+#名前空間とスコープ
 
-r = []
-for i in t:
-    if i % 2 ==0:
-        r.append(i)
+animal = 'cat'  #グローバル変数
 
-print(r)
+def f():
+   # print(animal)   #関数内でanimalをローカル変数として次の行で宣言、宣言前にprintを実行しようとしているためエラーが出る
+    animal = 'dog'  #ローカル変数
+    print('after:', animal)
 
-r = [i for i in t if i % 2 == 0] #上記のような複数行を一行にまとめてかける、rの中に直接for文を入れる
-print(r)
-
-r = []
-for i in t:
-    for j in t2:
-        r.append(i * j)
-
-print(r)
-
-r = [i * j for i in t for j in t2]   #ただし内包表記が長くなるとわかりにくくバグに繋がりやすいコードになりがちなので注意
-
-print(r)
+f()                 #上記ではprint文がなければエラーは出ない
 
 print('###########')
 ####################
-#辞書内包表記
 
-w = ['mon', 'tue', 'wed']
-f = ['coffee', 'milk', 'water']
+animal = 'cat'  # グローバル変数
 
-d = {}
-for x, y in zip(w, f):
-    d[x] = y
 
-print(d)
+def f():
+    global animal   # グローバル変数
+    animal = 'dog'  # ローカル変数
+    print('local:', animal)
 
-d = {x: y for x, y in zip(w, f)}
-print(d)
+    print(locals()) #関数内にあるローカル変数を確認したい時locals()
 
-print('###########')
-###################
-#集合内包表記
-s = set()
+f()
+print('global:', animal)
 
-for i in range(10):
-    if i % 2 == 0:
-        s.add(i)
+print('##############')
+########################
 
-print(s)
-
-s = {i for i in range(10) if i % 2 == 0}
-print(s)
-
-print('############')
-######################
-
-def g():
-    for i in range(10):
-        yield i
-g = g()
-
-#g = tuple(i for i in range(10) if i % 2 == 0) #タプルにしたい時は左のようにtupleを付ける
-#print(g)
-
-g = (i for i in range(10) if i % 2 == 0)
-
-for x in g:
-    print(x)
+print(globals())  #コード内にあるグローバル変数を確認したい時globals()
