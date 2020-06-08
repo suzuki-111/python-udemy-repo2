@@ -3,99 +3,73 @@ This is my first repo
 
  lesson.py 
 
-#クロージャー
-def circle_area_func(pi):
-    def circle_area(radius):
-        return  pi * radius * radius
+#リスト内包表記
+t = (1, 2, 3, 4, 5)
+t2 = (5, 6, 7, 8, 9, 10)
 
-    return circle_area
+r = []
+for i in t:
+    if i % 2 ==0:
+        r.append(i)
 
-ca1 = circle_area_func(3.14)
-ca2 = circle_area_func(3.141592)       #同じ関数でも引数を変えることで別の使い方ができる
+print(r)
 
-print(ca1(10))
-print(ca2(10))
+r = [i for i in t if i % 2 == 0] #上記のような複数行を一行にまとめてかける、rの中に直接for文を入れる
+print(r)
 
-print('###########')
-####################
+r = []
+for i in t:
+    for j in t2:
+        r.append(i * j)
 
-#デコレーター：関数の間に別の命令を挟んだりするときに使う
+print(r)
 
-def print_more(func):
-    def wrapper(*args, **kwargs):
-        print('func:', func.__name__)
-        print('args:', args)
-        print('kwargs:', kwargs)
-        result = func(*args, **kwargs)          #挟み込む関数の位置
-        print('result:', result)
-        return result
-    return wrapper
+r = [i * j for i in t for j in t2]   #ただし内包表記が長くなるとわかりにくくバグに繋がりやすいコードになりがちなので注意
 
-def print_info(func):
-    def wrapper(*args, **kwargs):
-        print('start')
-        result = func(*args, **kwargs)
-        print('end')
-        return result
-    return wrapper
-
-@print_info                                     #一番目に挟み込む関数
-@print_more                                     #二番目に挟み込む関数
-def add_num(a, b):                              #挟み込む関数
-    return  a + b
-
-r = add_num(10, 20)
 print(r)
 
 print('###########')
 ####################
+#辞書内包表記
 
-#ラムダ
-l = ['Mon', 'tue', 'Wed', 'Thu', 'fri', 'sat', 'Sun']
+w = ['mon', 'tue', 'wed']
+f = ['coffee', 'milk', 'water']
 
-def change_words(words, func):
-    for word in words:
-        print(func(word))
+d = {}
+for x, y in zip(w, f):
+    d[x] = y
 
-#def sample_func(word):
-#    return word.capitalize()
+print(d)
 
-# sample_func = lambda word: word.capitalize()
+d = {x: y for x, y in zip(w, f)}
+print(d)
 
-change_words(l, lambda  word: word.capitalize())   #ラムダを使えば上記のような簡単な関数を一行にまとめて書くことができる
-
-print('##########')
+print('###########')
 ###################
-#ジェネレーター
-#ジェネレーターはfor文とは異なり連続の処理ではなく一回ごとに止めて状態を保持する
-#一個ずつ呼び出したり、重い処理を複数回にわけることで軽くするときなどに使われる
+#集合内包表記
+s = set()
 
-def counter(num=10):
-    for _ in range(num):
-        yield 'run'
+for i in range(10):
+    if i % 2 == 0:
+        s.add(i)
 
-def greeting():
-    yield 'Good morining'
-    yield 'Good afternoon'
-    yield 'Good night'
+print(s)
 
-g = greeting()
-c = counter()
+s = {i for i in range(10) if i % 2 == 0}
+print(s)
 
-print(next(g))
+print('############')
+######################
 
-print(next(c))
-print(next(c))
-print(next(c))
-print(next(c))
-print(next(c))
+def g():
+    for i in range(10):
+        yield i
+g = g()
 
-print(next(g))
+#g = tuple(i for i in range(10) if i % 2 == 0) #タプルにしたい時は左のようにtupleを付ける
+#print(g)
 
-print(next(c))
-print(next(c))
-print(next(c))
-print(next(c))
-print(next(c))
+g = (i for i in range(10) if i % 2 == 0)
 
-print(next(g))
+for x in g:
+    print(x)
