@@ -3,57 +3,99 @@ This is my first repo
 
  lesson.py 
 
-#複数の引数を使いたい時
-def say_something(word, word2, word3):
-    print(word)
-    print(word2)
-    print(word3)
+#クロージャー
+def circle_area_func(pi):
+    def circle_area(radius):
+        return  pi * radius * radius
 
-say_something('Hi', 'Mike', 'Nance')
-#上記のようにするとめんどくさい。タプル型で以下のように表現すべき
-#変数の前に＊をつけることで引数がタプルになる
-def say_something(word, *args):
-    print('word =', word)
-    for arg in args:
-        print(arg)
+    return circle_area
 
-say_something('Hi!', 'Mike', 'Nance')
+ca1 = circle_area_func(3.14)
+ca2 = circle_area_func(3.141592)       #同じ関数でも引数を変えることで別の使い方ができる
 
-#下記のような表現もできる
-#t = ('Mike', 'Nancy')
-#say_something('Hi!', #t)
+print(ca1(10))
+print(ca2(10))
+
+print('###########')
+####################
+
+#デコレーター：関数の間に別の命令を挟んだりするときに使う
+
+def print_more(func):
+    def wrapper(*args, **kwargs):
+        print('func:', func.__name__)
+        print('args:', args)
+        print('kwargs:', kwargs)
+        result = func(*args, **kwargs)          #挟み込む関数の位置
+        print('result:', result)
+        return result
+    return wrapper
+
+def print_info(func):
+    def wrapper(*args, **kwargs):
+        print('start')
+        result = func(*args, **kwargs)
+        print('end')
+        return result
+    return wrapper
+
+@print_info                                     #一番目に挟み込む関数
+@print_more                                     #二番目に挟み込む関数
+def add_num(a, b):                              #挟み込む関数
+    return  a + b
+
+r = add_num(10, 20)
+print(r)
+
+print('###########')
+####################
+
+#ラムダ
+l = ['Mon', 'tue', 'Wed', 'Thu', 'fri', 'sat', 'Sun']
+
+def change_words(words, func):
+    for word in words:
+        print(func(word))
+
+#def sample_func(word):
+#    return word.capitalize()
+
+# sample_func = lambda word: word.capitalize()
+
+change_words(l, lambda  word: word.capitalize())   #ラムダを使えば上記のような簡単な関数を一行にまとめて書くことができる
 
 print('##########')
 ###################
+#ジェネレーター
+#ジェネレーターはfor文とは異なり連続の処理ではなく一回ごとに止めて状態を保持する
+#一個ずつ呼び出したり、重い処理を複数回にわけることで軽くするときなどに使われる
 
-#キーワード引数の辞書化
+def counter(num=10):
+    for _ in range(num):
+        yield 'run'
 
-#def menu(entree='beef', drink='wine'):
-#    print(entree, drink)
+def greeting():
+    yield 'Good morining'
+    yield 'Good afternoon'
+    yield 'Good night'
 
-#menu(entree='beef', drink='cofee')
-#上記のようなキーワードをまとめて記述できる
+g = greeting()
+c = counter()
 
-def menu(**kwargs):
-    print(kwargs)
-    for k, v in kwargs.items():
-        print(k, v)
+print(next(g))
 
-#menu(entree='beef', drink='cofee')
+print(next(c))
+print(next(c))
+print(next(c))
+print(next(c))
+print(next(c))
 
-#辞書を別で定義してやることも可能
-d = {
-    'entree': 'beef',
-    'drink': 'ice cofee',
-    'dessert': 'ice'
-}
-menu(**d)
+print(next(g))
 
-#引数の表現をいままでの全てを同時にやることも可能
-#ただしargsとkwargsの順番は下記でないといけない
-def menu(food, *args, **kwargs):
-    print(food)
-    print(args)
-    print(kwargs)
+print(next(c))
+print(next(c))
+print(next(c))
+print(next(c))
+print(next(c))
 
-menu('banana', 'apple', 'orange', entree='beef', drink='cofee')
+print(next(g))
