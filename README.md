@@ -3,34 +3,75 @@ This is my first repo
 
  lesson.py 
 
-#名前空間とスコープ
+#例外処理：エラーが出ても無視してプログラムを進める
 
-animal = 'cat'  #グローバル変数
+l = [1, 2, 3]
+i = 5
 
-def f():
-   # print(animal)   #関数内でanimalをローカル変数として次の行で宣言、宣言前にprintを実行しようとしているためエラーが出る
-    animal = 'dog'  #ローカル変数
-    print('after:', animal)
+try:
+    () + l              #タプル型とリスト型の足し算でエラー
+except IndexError as ex:
+    print("Don't worry: {}".format(ex))
+except NameError as ex:
+    print(ex)
+except Exception as ex:         #exceptでエラーが出てもプログラムを止めずに別の指示を実行する
+    print('other:{}'.format(ex))
+print("last")
 
-f()                 #上記ではprint文がなければエラーは出ない
-
-print('###########')
-####################
-
-animal = 'cat'  # グローバル変数
-
-
-def f():
-    global animal   # グローバル変数
-    animal = 'dog'  # ローカル変数
-    print('local:', animal)
-
-    print(locals()) #関数内にあるローカル変数を確認したい時locals()
-
-f()
-print('global:', animal)
+#上記の書き方の最後のotherでは全てのエラーを内包するので何がエラーかわかりにくくなるため避けるべき
 
 print('##############')
-########################
+#######################
 
-print(globals())  #コード内にあるグローバル変数を確認したい時globals()
+l = [1, 2, 3]
+i = 5
+
+try:
+    () + l
+except IndexError as ex:
+    print("Don't worry: {}".format(ex))
+except NameError as ex:
+    print(ex)
+except Exception as ex:
+    print('other:{}'.format(ex))
+finally:                  #finallyがあるときはエラーがあっても止まる直前に必ず実行する
+    print("clean up")
+
+print('##############')
+#######################
+
+l = [1, 2, 3]
+i = 5
+
+try:
+    l[0]
+except IndexError as ex:
+    print("Don't worry: {}".format(ex))
+except NameError as ex:
+    print(ex)
+except Exception as ex:
+    print('other:{}'.format(ex))
+else:
+    print('done')           #except文のときにエラーがなければelse文を実行する
+finally:
+    print("clean up")
+
+print('########################################')
+#################################################
+#################################################
+print('########################################')
+#独自例外の作成：オリジナルのエラー文を作成できる
+
+class UppercaseError(Exception):
+    pass
+
+
+def check():
+    words = ['APPLE','orange', 'banana']
+    for word in words:
+        if word.isupper():
+            raise UppercaseError
+
+check()
+
+#上記のように独自例外を作成できるが他の人間がコードを見たときになぜ独自例外を作成しているのかわかるような名前にしておくs
