@@ -3,75 +3,35 @@ This is my first repo
 
  lesson.py 
 
-#例外処理：エラーが出ても無視してプログラムを進める
+#モジュールとパッケージ
+#lesson_packageディレクトリをパッケージ、utilsファイルをモジュールとして作成
 
-l = [1, 2, 3]
-i = 5
+#import  lesson_package.utils
+#from lesson_package import utils
+#from lesson_package.utils import say_twice #一番上のコードを下二つのように書き換えることができる
+#しかし3行目のように省略したpassではどこから引っ張ってきたのかわからなくなるのでせいぜい2行目の省略にとどめておく
 
-try:
-    () + l              #タプル型とリスト型の足し算でエラー
-except IndexError as ex:
-    print("Don't worry: {}".format(ex))
-except NameError as ex:
-    print(ex)
-except Exception as ex:         #exceptでエラーが出てもプログラムを止めずに別の指示を実行する
-    print('other:{}'.format(ex))
-print("last")
+#r = say_twice('hello')
 
-#上記の書き方の最後のotherでは全てのエラーを内包するので何がエラーかわかりにくくなるため避けるべき
+#print(r)
 
-print('##############')
-#######################
+print('#########')
+##################
 
-l = [1, 2, 3]
-i = 5
+#from lesson_package import utils as u
 
-try:
-    () + l
-except IndexError as ex:
-    print("Don't worry: {}".format(ex))
-except NameError as ex:
-    print(ex)
-except Exception as ex:
-    print('other:{}'.format(ex))
-finally:                  #finallyがあるときはエラーがあっても止まる直前に必ず実行する
-    print("clean up")
+#r = u.say_twice('hello')
+#print(r)
+#asを使うことでutilsの名前を変えることができるかそれも他の人からわかりにくくなるので非推奨
 
-print('##############')
-#######################
+print('############')
+#####################
+#絶対パスと相対パス
 
-l = [1, 2, 3]
-i = 5
+from lesson_package.talk import human
 
-try:
-    l[0]
-except IndexError as ex:
-    print("Don't worry: {}".format(ex))
-except NameError as ex:
-    print(ex)
-except Exception as ex:
-    print('other:{}'.format(ex))
-else:
-    print('done')           #except文のときにエラーがなければelse文を実行する
-finally:
-    print("clean up")
-
-print('########################################')
-#################################################
-#################################################
-print('########################################')
-#独自例外の作成：オリジナルのエラー文を作成できる
-
-class UppercaseError(Exception):
-    pass
+print(human.sing())
+print(human.cry())
 
 
-def check():
-    words = ['APPLE','orange', 'banana']
-    for word in words:
-        if word.isupper():
-            raise UppercaseError
-
-check()
-
-#上記のように独自例外を作成できるが他の人間がコードを見たときになぜ独自例外を作成しているのかわかるような名前にしておくs
+#他のファイルを使用するところなのでわからないところは動画 or ネットで調べた方が良いのでここでストップ
